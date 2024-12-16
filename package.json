@@ -25,8 +25,10 @@
     "@capacitor/core": "6.2.0",
     "@capacitor/haptics": "6.0.2",
     "@capacitor/keyboard": "6.0.3",
+    "@capacitor/preferences": "^6.0.3",
     "@capacitor/status-bar": "6.0.2",
     "@ionic/angular": "^8.0.0",
+    "@supabase/supabase-js": "^2.47.8",
     "ionicons": "^7.2.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
@@ -60,5 +62,10 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.4.0"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "overrides": {
+    "@supabase/supabase-js": {
+      "@supabase/auth-js": "2.61.0"
+    }
+  }
 }
