@@ -1,12 +1,83 @@
 :host {
-  .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
-  .google-login-btn {
-    width: 80%;
-    max-width: 400px;
+  .login-background {
+    --background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+
+    .login-container {
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      text-align: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .logo-container {
+        margin-bottom: 40px;
+
+        .app-logo {
+          width: 120px;
+          height: 120px;
+          margin: 0 auto;
+          padding: 15px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .app-title {
+          color: white;
+          font-size: 28px;
+          margin-top: 20px;
+          font-weight: bold;
+        }
+
+        .app-subtitle {
+          color: rgba(255, 255, 255, 0.8);
+          font-size: 16px;
+          margin-top: 10px;
+        }
+      }
+
+      .login-card {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+
+        .login-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          h2 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 22px;
+          }
+
+          p {
+            color: #666;
+            margin-bottom: 20px;
+            text-align: center;
+          }
+
+          .google-login-btn {
+            --background: #4285f4;
+            --background-activated: #357ae8;
+            --color: white;
+            width: 100%;
+            font-weight: bold;
+            text-transform: none;
+            letter-spacing: 0.5px;
+
+            .google-icon {
+              margin-right: 10px;
+              font-size: 24px;
+            }
+          }
+        }
+      }
+    }
   }
 }

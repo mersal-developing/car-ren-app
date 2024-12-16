@@ -1,25 +1,55 @@
-<form (ngSubmit)="completeProfile()" class="ion-padding" [formGroup]="userForm">
-  <ion-item>
-    <ion-label position="floating">Username</ion-label>
-    <ion-input
-      formControlName="username"
-      name="username"
-      type="text"
-      required
-    ></ion-input>
-  </ion-item>
+<ion-content class="profile-background">
+  <div class="content-container">
+    <div class="profile-message">
+      <p>Please complete your profile data</p>
+    </div>
+    <form
+      (ngSubmit)="completeProfile()"
+      class="profile-form"
+      [formGroup]="userForm"
+    >
+      <ion-item>
+        <ion-label position="floating">Username</ion-label>
+        <ion-input
+          formControlName="username"
+          name="username"
+          type="text"
+          required
+        ></ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">Phone Number</ion-label>
-    <ion-input
-      formControlName="phoneNumber"
-      name="phoneNumber"
-      type="tel"
-      required
-    ></ion-input>
-  </ion-item>
+      @if(userForm.get('username')?.invalid &&
+      userForm.get('username')?.touched) {
+      <ion-text color="danger">
+        <p class="error-text">Please enter a valid username.</p>
+      </ion-text>
+      }
 
-  <ion-button type="submit" expand="block" class="ion-margin-top">
-    Complete Profile
-  </ion-button>
-</form>
+      <ion-item>
+        <ion-label position="floating">Phone Number</ion-label>
+        <ion-input
+          formControlName="phoneNumber"
+          name="phoneNumber"
+          type="tel"
+          required
+        ></ion-input>
+      </ion-item>
+
+      @if(userForm.get('phoneNumber')?.invalid &&
+      userForm.get('phoneNumber')?.touched) {
+      <ion-text color="danger">
+        <p class="error-text">Please enter a valid phone number.</p>
+      </ion-text>
+      }
+
+      <ion-button
+        type="submit"
+        expand="block"
+        [disabled]="userForm.invalid"
+        class="submit-button"
+      >
+        Complete Profile
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

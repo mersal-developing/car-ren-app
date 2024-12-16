@@ -1,14 +1,20 @@
-<ion-content class="ion-padding">
-  <!-- Google Login Button -->
+<ion-content class="login-background">
   <div class="login-container">
+    <div class="logo-container">
+      <ion-img src="assets/icon/logo.webp" class="app-logo"></ion-img>
+      <h1 class="app-title">DriveEasy Rentals</h1>
+      <p class="app-subtitle">Rent a Car with Ease</p>
+    </div>
+
     <ion-button
       expand="block"
       (click)="loginWithGoogle()"
       color="light"
-      class="google-login-btn"
+      class="google-login-btn ion-padding"
+      fill="outline"
     >
-      <ion-icon name="logo-google"></ion-icon>
-      Sign in with Google
+      <ion-icon slot="start" name="logo-google" class="google-icon"></ion-icon>
+      Continue with Google
     </ion-button>
   </div>
 </ion-content>

@@ -1,12 +1,14 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { SupabaseClient, User, createClient } from '@supabase/supabase-js';
 import { environment } from 'src/environments/environment';
+import { UtilitiesService } from './utilities.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private utilitiesService = inject(UtilitiesService);
   private supabase: SupabaseClient;
 
   // Signals for reactive state management
@@ -43,6 +45,8 @@ export class AuthService {
 
     if (error) {
       console.error('Google Sign-In Error:', error);
+      this.utilitiesService.presentToast(error.message)
+
       return false;
     }
 
@@ -61,12 +65,18 @@ export class AuthService {
         .eq('id', user.id)
         .single();
 
-      if (error) return false;
+      if (error) {
+        console.log(error)
+
+        return false;
+      }
 
       // Return true if both username and phone_number exist
       return !!(data?.username && data?.phone_number);
     } catch (err) {
       console.error('Profile Check Error:', err);
+      this.utilitiesService.presentToast('Profile Check Error')
+
       return false;
     }
   }
@@ -93,11 +103,16 @@ export class AuthService {
         .insert(profileData)
         .select();
 
+      if (insertData.error) {
+        this.utilitiesService.presentToast(insertData.error.message)
+        return;
+      }
 
-      console.log('Profile created successfully:', insertData);
       return true;
     } catch (error) {
       console.error('Profile Update/Insert Error:', error);
+      this.utilitiesService.presentToast(`Profile create failed ${error}`)
+
       return false;
     }
   }

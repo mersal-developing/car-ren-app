@@ -9,7 +9,10 @@ export const authGuard: CanActivateFn = async () => {
   const authSession = await authService.isAuthenticated()
   const isAuthenticated = authSession.data.session;
 
-  const isProfileComplete = await authService.checkProfileCompletion()
+  let isProfileComplete;
+  if (isAuthenticated) {
+    isProfileComplete = await authService.checkProfileCompletion()
+  }
 
   if (isAuthenticated && isProfileComplete) {
     return true;

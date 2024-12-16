@@ -1,0 +1,47 @@
+:host {
+  .profile-background {
+    --background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+
+    .content-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      flex-direction: column;
+
+      .profile-message {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 20px;
+      }
+
+      .profile-form {
+        width: 90%;
+        max-width: 400px;
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+
+        ion-item {
+          margin-bottom: 15px;
+        }
+
+        .error-text {
+          font-size: 14px;
+          margin-top: 5px;
+        }
+
+        .submit-button {
+          --background: #34a853;
+          --background-activated: #2c8c47;
+          --color: white;
+          font-weight: bold;
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+}
