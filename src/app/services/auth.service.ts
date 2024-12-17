@@ -3,7 +3,7 @@ import { PostgrestError, SupabaseClient, User, createClient } from '@supabase/su
 import { environment } from 'src/environments/environment';
 import { UtilitiesService } from './utilities.service';
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
-import { BehaviorSubject, Observable, filter } from "rxjs";
+import { filter } from "rxjs";
 import { Event, NavigationEnd, Router } from "@angular/router";
 
 @Injectable({
