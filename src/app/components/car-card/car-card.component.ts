@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { SliderComponent } from "../slider/slider.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-car-card',
@@ -10,8 +11,13 @@ import { SliderComponent } from "../slider/slider.component";
   imports: [IonicModule, SliderComponent]
 })
 export class CarCardComponent {
+  private router = inject(Router);
 
   constructor() { }
 
+
+  navigateToCarPage() {
+    this.router.navigate(['/car-details'])
+  }
 
 }

@@ -1,4 +1,4 @@
-<ion-card>
+<ion-card (click)="navigateToCarPage()">
   <app-slider></app-slider>
   <ion-card-header>
     <ion-card-title>Hyundai Accent 2021</ion-card-title>
@@ -26,24 +26,23 @@
   </ion-card-content>
 
   <!-- Actions -->
-  <ion-footer>
+  <ion-footer (click)="$event.stopPropagation()">
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-button color="warning" expand="block">
+          <ion-button color="warning" expand="block" href="tel:+96878823918">
             <ion-icon name="call-outline" slot="start"></ion-icon> Call
           </ion-button>
         </ion-col>
         <ion-col>
-          <ion-button color="success" expand="block">
+          <ion-button
+            color="success"
+            expand="block"
+            href="https://wa.me/971501532453"
+          >
             <ion-icon name="logo-whatsapp" slot="start"></ion-icon> WhatsApp
           </ion-button>
         </ion-col>
-        <!-- <ion-col>
-          <ion-button color="dark" expand="block">
-            <ion-icon name="paper-plane-outline" slot="start"></ion-icon> Send
-          </ion-button>
-        </ion-col> -->
       </ion-row>
     </ion-grid>
   </ion-footer>
