@@ -1,0 +1,31 @@
+:host {
+  ion-card {
+    // box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+
+    img {
+      border-radius: 8px 8px 0 0;
+      width: 100%;
+      object-fit: cover;
+      max-height: 180px;
+    }
+
+    .pricing p {
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .rental-info {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    ion-footer {
+      border-top: 1px solid #e0e0e0;
+      background: #f9f9f9;
+    }
+  }
+}
