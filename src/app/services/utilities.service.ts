@@ -9,14 +9,26 @@ export class UtilitiesService {
 
   constructor() { }
 
-  async presentToast(message: string, position: 'top' | 'middle' | 'bottom' = 'top',) {
+  async presentToast(
+    message: string,
+    position: 'top' | 'middle' | 'bottom' = 'top',
+    color: 'success' | 'warning' | 'danger' | 'medium' = 'medium',
+    duration: number = 1500
+  ) {
     const toast = await this.toastController.create({
       message,
-      duration: 1500,
-      position: position,
-      color: 'medium'
+      duration,
+      position,
+      color
     });
-
     await toast.present();
+  }
+
+
+  handleError(message: string, error: any): void {
+
+    const errorMessage = error?.message || JSON.stringify(error) || 'Unknown error';
+    console.error(message, errorMessage);
+    this.presentToast(`${message}: ${errorMessage}`, 'top', 'danger');
   }
 }

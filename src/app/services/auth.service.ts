@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { SupabaseClient, User, createClient } from '@supabase/supabase-js';
+import { PostgrestError, SupabaseClient, User, createClient } from '@supabase/supabase-js';
 import { environment } from 'src/environments/environment';
 import { UtilitiesService } from './utilities.service';
 
@@ -24,8 +24,14 @@ export class AuthService {
   }
 
   async setUser() {
-    const user = await this.supabase.auth.getUser()
-    this.user.set(user.data.user);
+    try {
+      const { data, error } = await this.supabase.auth.getUser();
+      if (error) this.utilitiesService.handleError('Failed to set user', error);
+
+      this.user.set(data.user);
+    } catch (error) {
+      this.utilitiesService.handleError('Failed to set user', error);
+    }
   }
 
   isAuthenticated() {
@@ -45,7 +51,7 @@ export class AuthService {
 
     if (error) {
       console.error('Google Sign-In Error:', error);
-      this.utilitiesService.presentToast(error.message)
+      this.utilitiesService.handleError('Google Sign-In Error:', error.message)
 
       return false;
     }
@@ -54,31 +60,23 @@ export class AuthService {
     return true;
   }
 
-  async checkProfileCompletion() {
+  async checkProfileCompletion(): Promise<boolean | PostgrestError> {
+
     const user = this.user();
     if (!user) return false;
 
-    try {
-      const { data, error } = await this.supabase
-        .from('profiles')
-        .select('username, phone_number')
-        .eq('id', user.id)
-        .single();
+    const { data, error } = await this.supabase
+      .from('profiles')
+      .select('username, phone_number')
+      .eq('id', user.id)
+      .single();
 
-      if (error) {
-        console.log(error)
-
-        return false;
-      }
-
-      // Return true if both username and phone_number exist
-      return !!(data?.username && data?.phone_number);
-    } catch (err) {
-      console.error('Profile Check Error:', err);
-      this.utilitiesService.presentToast('Profile Check Error')
-
+    if (error) {
+      this.utilitiesService.handleError('Profile Check Error', error);
       return false;
     }
+
+    return !!(data?.username && data?.phone_number);
   }
 
   async createProfile(username: string, phoneNumber: string) {
@@ -97,45 +95,28 @@ export class AuthService {
       email: user.email
     };
 
-    try {
-      const insertData = await this.supabase
-        .from('profiles')
-        .insert(profileData)
-        .select();
+    const { error } = await this.supabase.from('profiles').insert(profileData).select();
 
-      if (insertData.error) {
-        this.utilitiesService.presentToast(insertData.error.message)
-        return;
-      }
 
-      return true;
-    } catch (error) {
-      console.error('Profile Update/Insert Error:', error);
-      this.utilitiesService.presentToast(`Profile create failed ${error}`)
-
+    if (error) {
+      this.utilitiesService.handleError('Profile Creation Error', error);
       return false;
     }
+
+    return true;
   }
 
-  async signOut() {
-    try {
-      // Supabase sign out
-      const { error } = await this.supabase.auth.signOut();
+  async signOut(): Promise<boolean> {
+    const { error } = await this.supabase.auth.signOut();
 
-      // If there's an error during sign out
-      if (error) {
-        console.error('Sign Out Error:', error.message);
-        return false;
-      }
-
-      this.router.navigate(['/login']);
-
-      return true;
-    } catch (err) {
-      console.error('Unexpected Sign Out Error:', err);
+    if (error) {
+      this.utilitiesService.handleError('Sign Out Error', error);
       return false;
     }
-  }
 
+    this.user.set(null);
+    this.router.navigate(['/login']);
+    return true;
+  }
 
 }

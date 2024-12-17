@@ -33,8 +33,9 @@ export class ProfileCompletePage {
   async completeProfile() {
     // Validate the form
     if (this.userForm.invalid) {
-      // TODO: Show error toast for invalid inputs
       console.error('Invalid form inputs:', this.userForm.errors);
+      this.utilitiesService.presentToast('Please fill out the form correctly.', 'top', 'danger');
+
       return;
     }
 
@@ -53,14 +54,12 @@ export class ProfileCompletePage {
       if (success) {
         await this.router.navigate(['/home']);
       } else {
-
         console.error('Profile create failed');
+        this.utilitiesService.presentToast('Profile creation failed.', 'top', 'danger');
       }
     } catch (error) {
-      // Handle error cases (e.g., network issues)
       console.error('Error during profile creation:', error);
-      this.utilitiesService.presentToast(`'Error during profile update:', ${error}`)
-
+      this.utilitiesService.handleError('Error during profile creation', error);
     }
   }
 }
