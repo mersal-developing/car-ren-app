@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonIcon, IonButtons, IonToolbar, IonTitle, IonProgressBar } from "@ionic/angular/standalone";
+import { IonHeader, IonIcon, IonButtons, IonToolbar, IonTitle } from "@ionic/angular/standalone";
 import { SearchComponent } from "src/app/components/search/search.component";
 
 @Component({
@@ -7,7 +7,7 @@ import { SearchComponent } from "src/app/components/search/search.component";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports: [IonProgressBar, IonTitle, IonToolbar, IonButtons, IonIcon, IonHeader, SearchComponent]
+  imports: [IonTitle, IonToolbar, IonButtons, IonIcon, IonHeader, SearchComponent]
 })
 export class HeaderComponent {
 

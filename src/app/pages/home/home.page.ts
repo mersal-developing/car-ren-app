@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonContent, IonText } from '@ionic/angular/standalone';
+import { IonContent } from '@ionic/angular/standalone';
 import { HeaderComponent } from "src/app/components/header/header.component";
 import { CarCardComponent } from "src/app/components/car-card/car-card.component";
 
@@ -8,7 +8,7 @@ import { CarCardComponent } from "src/app/components/car-card/car-card.component
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonText, IonContent, HeaderComponent, CarCardComponent],
+  imports: [IonContent, HeaderComponent, CarCardComponent],
 })
 export class HomePage {
   constructor() { }

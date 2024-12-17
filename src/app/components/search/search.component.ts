@@ -6,7 +6,7 @@ import { IonSearchbar } from "@ionic/angular/standalone";
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
   standalone: true,
-  imports: [IonSearchbar,]
+  imports: [IonSearchbar]
 })
 export class SearchComponent {
 
