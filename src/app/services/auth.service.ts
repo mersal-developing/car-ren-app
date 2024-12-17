@@ -1,8 +1,10 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Router } from '@angular/router';
 import { PostgrestError, SupabaseClient, User, createClient } from '@supabase/supabase-js';
 import { environment } from 'src/environments/environment';
 import { UtilitiesService } from './utilities.service';
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { BehaviorSubject, Observable, filter } from "rxjs";
+import { Event, NavigationEnd, Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +12,26 @@ import { UtilitiesService } from './utilities.service';
 export class AuthService {
   private utilitiesService = inject(UtilitiesService);
   private supabase: SupabaseClient;
+  private router = inject(Router);
 
   // Signals for reactive state management
   public user = signal<User | null>(null);
 
-  constructor(private router: Router) {
+  constructor() {
     this.supabase = createClient(
       environment.supabaseUrl,
       environment.supabaseKey
     );
-
-    this.setUser()
+    this.router.events
+      .pipe(
+        takeUntilDestroyed(),
+        filter(event => event instanceof NavigationEnd)
+      )
+      .subscribe((event: Event) => {
+        if (event instanceof NavigationEnd) {
+          event.url !== '/login' && this.setUser()
+        }
+      })
   }
 
   async setUser() {
@@ -48,7 +59,6 @@ export class AuthService {
         }
       }
     });
-
     if (error) {
       console.error('Google Sign-In Error:', error);
       this.utilitiesService.handleError('Google Sign-In Error:', error.message)
@@ -56,12 +66,12 @@ export class AuthService {
       return false;
     }
 
-    this.setUser()
     return true;
   }
 
   async checkProfileCompletion(): Promise<boolean | PostgrestError> {
 
+    await this.setUser()
     const user = this.user();
     if (!user) return false;
 
@@ -72,7 +82,8 @@ export class AuthService {
       .single();
 
     if (error) {
-      this.utilitiesService.handleError('Profile Check Error', error);
+      // this.utilitiesService.handleError('Profile Check Error', error);
+      console.log(error)
       return false;
     }
 

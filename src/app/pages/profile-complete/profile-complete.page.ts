@@ -44,6 +44,7 @@ export class ProfileCompletePage {
     if (isProfileComplete) {
       console.log('profile already completed')
       this.utilitiesService.presentToast('Profile already completed')
+      this.router.navigate(['/home']);
       return
     }
     // Extract form values
