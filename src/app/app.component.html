@@ -1,5 +1,7 @@
 <ion-app>
   <ion-router-outlet>
+    @if(isAuthenticated()) {
     <app-header></app-header>
+    }
   </ion-router-outlet>
 </ion-app>

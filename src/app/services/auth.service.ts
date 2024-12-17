@@ -37,7 +37,7 @@ export class AuthService {
   async setUser() {
     try {
       const { data, error } = await this.supabase.auth.getUser();
-      if (error) this.utilitiesService.handleError('Failed to set user', error);
+      console.log('Failed to set user', error)
 
       this.user.set(data.user);
     } catch (error) {
