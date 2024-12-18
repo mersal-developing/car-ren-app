@@ -1,13 +1,12 @@
 import { Injectable, inject } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilitiesService {
   private toastController = inject(ToastController);
-
-  constructor() { }
+  private loadingCtrl = inject(LoadingController);
 
   async presentToast(
     message: string,
@@ -30,5 +29,15 @@ export class UtilitiesService {
     const errorMessage = error?.message || JSON.stringify(error) || 'Unknown error';
     console.error(message, errorMessage);
     this.presentToast(`${message}: ${errorMessage}`, 'top', 'danger');
+  }
+
+
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Dismissing after 3 seconds...',
+      duration: 3000,
+    });
+
+    loading.present();
   }
 }

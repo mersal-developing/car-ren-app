@@ -1,18 +1,28 @@
-<ion-card (click)="navigateToCarPage()">
+<ion-card (click)="navigateToCarPage()" class="car-card" mode="ios">
   <app-slider></app-slider>
   <ion-card-header>
-    <ion-card-title>Hyundai Accent 2021</ion-card-title>
-    <ion-card-subtitle>
+    <ion-card-title>
+      <ion-text> Hyundai Accent 2021 </ion-text>
       <ion-badge color="light">Sedan</ion-badge>
-      <ion-icon name="car-outline"></ion-icon> 4
-      <ion-icon name="people-outline"></ion-icon> 5
-      <ion-icon name="bag-outline"></ion-icon> 2
+    </ion-card-title>
+    <ion-card-subtitle>
+      <div>
+        <span>
+          <ion-text>4 </ion-text> <ion-icon name="car-outline"></ion-icon>
+        </span>
+        <span>
+          <ion-text>5 </ion-text> <ion-icon name="people-outline"></ion-icon>
+        </span>
+        <span>
+          <ion-text>2 </ion-text> <ion-icon name="bag-outline"></ion-icon>
+        </span>
+      </div>
     </ion-card-subtitle>
   </ion-card-header>
 
   <ion-card-content>
     <!-- Pricing -->
-    <div class="pricing">
+    <div class="pricing ion-margin-top">
       <p><strong>AED 90</strong> / day | <strong>250 km</strong></p>
       <p><strong>AED 1750</strong> / month | <strong>5000 km</strong></p>
     </div>
@@ -27,23 +37,15 @@
 
   <!-- Actions -->
   <ion-footer (click)="$event.stopPropagation()">
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-button color="warning" expand="block" href="tel:+96878823918">
-            <ion-icon name="call-outline" slot="start"></ion-icon> Call
-          </ion-button>
-        </ion-col>
-        <ion-col>
-          <ion-button
-            color="success"
-            expand="block"
-            href="https://wa.me/971501532453"
-          >
-            <ion-icon name="logo-whatsapp" slot="start"></ion-icon> WhatsApp
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-button color="warning" expand="block" href="tel:+96878823918">
+      <ion-icon name="call-outline" slot="start"></ion-icon> Call
+    </ion-button>
+    <ion-button
+      color="success"
+      expand="block"
+      href="https://wa.me/971501532453"
+    >
+      <ion-icon name="logo-whatsapp" slot="start"></ion-icon> WhatsApp
+    </ion-button>
   </ion-footer>
 </ion-card>

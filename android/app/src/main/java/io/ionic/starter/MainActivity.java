@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.car.rent;
 
 import com.getcapacitor.BridgeActivity;
 

@@ -27,7 +27,7 @@ export class AppComponent {
       )
       .subscribe((event: Event) => {
         if (event instanceof NavigationEnd) {
-          if (event.urlAfterRedirects !== '/login' && event.urlAfterRedirects !== '/profile-complete') {
+          if (!event.urlAfterRedirects.includes('/login') && !event.urlAfterRedirects.includes('/profile-complete')) {
             this.isAuthenticated.set(true)
           }
         }

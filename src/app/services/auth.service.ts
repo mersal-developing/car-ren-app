@@ -5,6 +5,7 @@ import { UtilitiesService } from './utilities.service';
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { filter } from "rxjs";
 import { Event, NavigationEnd, Router } from "@angular/router";
+import { SocialLogin } from '@capgo/capacitor-social-login';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class AuthService {
   async setUser() {
     try {
       const { data, error } = await this.supabase.auth.getUser();
-      console.log('Failed to set user', error)
+      if (error) console.log('Failed to set user', error)
 
       this.user.set(data.user);
     } catch (error) {
@@ -50,21 +51,30 @@ export class AuthService {
   }
 
   async signInWithGoogle() {
-    const { data, error } = await this.supabase.auth.signInWithOAuth({
+
+    await SocialLogin.initialize({
+      google: {
+        webClientId: environment.webClientId
+      },
+    });
+
+    const res = await SocialLogin.login({
       provider: 'google',
       options: {
-        queryParams: {
-          access_type: 'offline',
-          prompt: 'consent'
-        }
-      }
+        scopes: ['email', 'profile'],
+      },
     });
-    if (error) {
-      console.error('Google Sign-In Error:', error);
-      this.utilitiesService.handleError('Google Sign-In Error:', error.message)
 
-      return false;
+
+    if (res.result.idToken) {
+      const { data, error } = await this.supabase.auth.signInWithIdToken({
+        provider: 'google',
+        token: res.result.idToken
+      })
+      if (error) return false;
+      else if (data) this.setUser();
     }
+
 
     return true;
   }

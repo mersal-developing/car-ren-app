@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonButton, IonIcon, IonImg } from '@ionic/angular/standalone';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
+import { UtilitiesService } from 'src/app/services/utilities.service';
 
 @Component({
   selector: 'app-login',
@@ -13,10 +15,21 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginPage {
   private authService = inject(AuthService);
+  private router = inject(Router);
+  private utilitiesService = inject(UtilitiesService);
 
 
-  loginWithGoogle() {
-    this.authService.signInWithGoogle();
+  async loginWithGoogle() {
+    const isLoggedIn = await this.authService.signInWithGoogle();
+    const isProfileComplete = await this.authService.checkProfileCompletion()
+
+    if (isLoggedIn && !isProfileComplete) {
+      this.utilitiesService.showLoading()
+      this.router.navigate(['/profile-complete']);
+    } else if (isLoggedIn && isProfileComplete) {
+      this.utilitiesService.showLoading()
+      this.router.navigate(['/home'])
+    }
   }
 
 }

@@ -29,7 +29,6 @@ export class ProfileCompletePage {
     })
   }
 
-
   async completeProfile() {
     // Validate the form
     if (this.userForm.invalid) {

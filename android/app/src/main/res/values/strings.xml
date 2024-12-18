@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">rent-car-app</string>
     <string name="title_activity_main">rent-car-app</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="package_name">com.car.rent</string>
+    <string name="custom_url_scheme">com.car.rent</string>
+    <string name="server_client_id">692023746362-4o16nnv10rm8769nvlhthj173eij25bg.apps.googleusercontent.com</string>
 </resources>
