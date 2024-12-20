@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { ToastController, LoadingController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular/standalone';
 
 @Injectable({
   providedIn: 'root'
@@ -34,10 +34,14 @@ export class UtilitiesService {
 
   async showLoading() {
     const loading = await this.loadingCtrl.create({
-      message: 'Dismissing after 3 seconds...',
-      duration: 3000,
+      cssClass: 'spinner',
+      duration: 2000
     });
 
     loading.present();
+  }
+
+  async stopLoadingSpinner() {
+    if (await this.loadingCtrl.getTop()) this.loadingCtrl.dismiss();
   }
 }

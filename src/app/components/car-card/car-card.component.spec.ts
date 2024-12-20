@@ -9,7 +9,7 @@ describe('CarCardComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CarCardComponent ],
+      declarations: [CarCardComponent],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 

@@ -1,6 +1,13 @@
 :host {
   ion-content {
     --ion-background-color: #f9f9f9;
+
+    ion-toolbar {
+      .toolbar-container {
+        display: flex;
+        align-items: center;
+      }
+    }
   }
 
   .car-details {

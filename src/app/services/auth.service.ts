@@ -6,6 +6,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { filter } from "rxjs";
 import { Event, NavigationEnd, Router } from "@angular/router";
 import { SocialLogin } from '@capgo/capacitor-social-login';
+import { RoutingService } from './routing.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ import { SocialLogin } from '@capgo/capacitor-social-login';
 export class AuthService {
   private utilitiesService = inject(UtilitiesService);
   private supabase: SupabaseClient;
-  private router = inject(Router);
+  private routingService = inject(RoutingService);
 
   // Signals for reactive state management
   public user = signal<User | null>(null);
@@ -23,7 +24,7 @@ export class AuthService {
       environment.supabaseUrl,
       environment.supabaseKey
     );
-    this.router.events
+    this.routingService.routerNavigationEndObservable
       .pipe(
         takeUntilDestroyed(),
         filter(event => event instanceof NavigationEnd)
@@ -67,6 +68,7 @@ export class AuthService {
 
 
     if (res.result.idToken) {
+      this.utilitiesService.showLoading();
       const { data, error } = await this.supabase.auth.signInWithIdToken({
         provider: 'google',
         token: res.result.idToken
@@ -81,7 +83,7 @@ export class AuthService {
 
   async checkProfileCompletion(): Promise<boolean | PostgrestError> {
 
-    await this.setUser()
+    await this.setUser();
     const user = this.user();
     if (!user) return false;
 
@@ -92,7 +94,6 @@ export class AuthService {
       .single();
 
     if (error) {
-      // this.utilitiesService.handleError('Profile Check Error', error);
       console.log(error)
       return false;
     }
@@ -118,7 +119,6 @@ export class AuthService {
 
     const { error } = await this.supabase.from('profiles').insert(profileData).select();
 
-
     if (error) {
       this.utilitiesService.handleError('Profile Creation Error', error);
       return false;
@@ -136,7 +136,7 @@ export class AuthService {
     }
 
     this.user.set(null);
-    this.router.navigate(['/login']);
+    this.routingService.navigateByUrl('/login');
     return true;
   }
 

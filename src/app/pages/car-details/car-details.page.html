@@ -1,6 +1,14 @@
 <ion-content [fullscreen]="true">
   <ion-toolbar>
-    <ion-title>BMW X7 M60i 2023</ion-title>
+    <div class="toolbar-container">
+      <ion-buttons slot="start">
+        <ion-back-button
+          icon="chevron-back-outline"
+          defaultHref="/home"
+        ></ion-back-button>
+      </ion-buttons>
+      <ion-text> BMW X7 M60i 2023</ion-text>
+    </div>
   </ion-toolbar>
 
   <app-slider></app-slider>

@@ -9,5 +9,6 @@ export const appConfig: ApplicationConfig = {
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         provideIonicAngular(),
         provideRouter(routes, withPreloading(PreloadAllModules))
-    ]
+    ],
+
 }
