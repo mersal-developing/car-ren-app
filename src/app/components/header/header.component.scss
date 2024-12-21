@@ -1,5 +1,14 @@
 :host {
   ion-header {
     z-index: 9999;
+
+    .person-image {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      object-fit: cover;
+      margin-right: 10px;
+    }
   }
 }
