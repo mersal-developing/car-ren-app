@@ -11,8 +11,8 @@ export const loginGuard: CanActivateFn = async () => {
 
   if (isAuthenticated) {
     router.navigate(['/home']);
-    return false;  // Prevent access to the login page
+    return false;
   }
 
-  return true;  // Allow access to the login page
+  return true;
 };

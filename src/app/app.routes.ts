@@ -1,6 +1,8 @@
-import { Routes } from '@angular/router';
+import { Router, Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
 import { loginGuard } from './guards/login.guard';
+import { inject } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
 export const routes: Routes = [
   {
@@ -15,7 +17,17 @@ export const routes: Routes = [
   },
   {
     path: 'profile-complete',
-    loadComponent: () => import('./pages/profile-complete/profile-complete.page').then(m => m.ProfileCompletePage)
+    loadComponent: () => import('./pages/profile-complete/profile-complete.page').then(m => m.ProfileCompletePage),
+    canActivate: [async () => {
+      const router = inject(Router);
+      const authService = inject(AuthService)
+      const isProfileComplete = await authService.checkProfileCompletion()
+      if (isProfileComplete) {
+        router.navigate(['/home']);
+        return false;
+      }
+      else return true;
+    }]
   },
   {
     path: 'home',

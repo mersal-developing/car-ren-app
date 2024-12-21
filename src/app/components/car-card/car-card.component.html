@@ -1,6 +1,8 @@
 <ion-card (click)="navigateToCarPage()" class="car-card" mode="ios">
   <app-slider></app-slider>
-  <ion-card-header>
+  <ion-card-header
+    class="ion-no-padding ion-padding-horizontal ion-padding-top"
+  >
     <ion-card-title>
       <ion-text> Hyundai Accent 2021 </ion-text>
       <ion-badge color="primary">Sedan</ion-badge>
@@ -20,7 +22,7 @@
     </ion-card-subtitle>
   </ion-card-header>
 
-  <ion-card-content>
+  <ion-card-content class="ion-no-padding ion-padding-horizontal">
     <!-- Pricing -->
     <div class="pricing ion-margin-top">
       <p><strong>AED 90</strong> / day | <strong>250 km</strong></p>
@@ -36,7 +38,7 @@
   </ion-card-content>
 
   <!-- Actions -->
-  <ion-footer (click)="$event.stopPropagation()" mode="ios">
+  <ion-footer (click)="$event.stopPropagation()" mode="ios" class="ion-padding">
     <ion-button
       color="primary"
       expand="block"
