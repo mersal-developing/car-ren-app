@@ -1,0 +1,18 @@
+ion-content {
+  --padding-top: 7rem !important;
+}
+
+app-login,
+app-profile-complete {
+  ion-content {
+    --padding-top: 0 !important;
+  }
+}
+
+ion-badge {
+  --padding-top: 0.5rem;
+  --padding-bottom: 0.5rem;
+  --padding-end: 0.5rem;
+  --padding-start: 0.5rem;
+  border-radius: 10px;
+}

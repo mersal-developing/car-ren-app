@@ -3,7 +3,7 @@
   <ion-card-header>
     <ion-card-title>
       <ion-text> Hyundai Accent 2021 </ion-text>
-      <ion-badge color="light">Sedan</ion-badge>
+      <ion-badge color="primary">Sedan</ion-badge>
     </ion-card-title>
     <ion-card-subtitle>
       <div>
@@ -36,16 +36,24 @@
   </ion-card-content>
 
   <!-- Actions -->
-  <ion-footer (click)="$event.stopPropagation()">
-    <ion-button color="warning" expand="block" href="tel:+96878823918">
-      <ion-icon name="call-outline" slot="start"></ion-icon> Call
+  <ion-footer (click)="$event.stopPropagation()" mode="ios">
+    <ion-button
+      color="primary"
+      expand="block"
+      href="tel:+96878823918"
+      size="medium"
+    >
+      <ion-icon name="call-outline" slot="start"></ion-icon>
+      <ion-text>Call</ion-text>
     </ion-button>
+
     <ion-button
       color="success"
       expand="block"
       href="https://wa.me/971501532453"
     >
-      <ion-icon name="logo-whatsapp" slot="start"></ion-icon> WhatsApp
+      <ion-icon name="logo-whatsapp" slot="start" color="light"></ion-icon>
+      <ion-text color="light">WhatsApp</ion-text>
     </ion-button>
   </ion-footer>
 </ion-card>

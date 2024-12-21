@@ -14,23 +14,31 @@
   <app-slider></app-slider>
   <!-- Car Details -->
   <div class="car-details">
-    <h2>BMW X7 M60i 2023</h2>
+    <ion-text class="car-model">BMW X7 M60i 2023</ion-text>
+
     <div class="car-info">
       <ion-badge color="primary">SUV</ion-badge>
       <ion-badge color="primary">4 Doors</ion-badge>
       <ion-badge color="primary">7 Seats</ion-badge>
       <ion-badge color="primary">3 Bags</ion-badge>
     </div>
-    <h3>From AED 1300 / day</h3>
-    <p>Explore rates for daily, weekly, and monthly rental</p>
+
+    <ion-text color="medium">
+      <h3>From AED 1300 / day</h3>
+    </ion-text>
+
+    <ion-text>
+      <p>Explore rates for daily, weekly, and monthly rental</p>
+    </ion-text>
 
     <!-- Disclaimer -->
-    <div class="disclaimer">
-      <p>
-        <strong>Disclaimer:</strong> Rental details are provided by the
-        supplier. Verify information before booking.
-      </p>
-    </div>
+    <ion-item class="disclaimer" lines="none">
+      <ion-label>
+        <strong>Disclaimer:</strong>
+        Rental details are provided by the supplier. Verify information before
+        booking.
+      </ion-label>
+    </ion-item>
 
     <!-- Pricing Information -->
     <div class="pricing">
@@ -51,16 +59,17 @@
     <!-- Contact & Actions -->
     <div class="actions">
       <ion-button color="dark" href="tel:+96878823918">
-        <ion-icon slot="start" name="call"></ion-icon>
-        Call
+        <ion-icon slot="start" name="call" color="light"></ion-icon>
+        <ion-text color="light">Call</ion-text>
       </ion-button>
+
       <ion-button
         color="success"
         href="https://wa.me/971501532453"
         target="_blank"
       >
-        <ion-icon slot="start" name="logo-whatsapp"></ion-icon>
-        WhatsApp
+        <ion-icon slot="start" name="logo-whatsapp" color="light"></ion-icon>
+        <ion-text color="light">WhatsApp</ion-text>
       </ion-button>
     </div>
   </div>

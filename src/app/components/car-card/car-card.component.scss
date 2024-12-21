@@ -23,6 +23,13 @@
         ion-text {
           font-size: 1rem;
         }
+
+        ion-badge {
+          --padding-top: 0.5rem;
+          --padding-bottom: 0.5rem;
+          --padding-end: 0.5rem;
+          --padding-start: 0.5rem;
+        }
       }
       ion-card-subtitle {
         margin-top: 0.5rem;
@@ -37,12 +44,10 @@
             ion-text {
               margin-right: 0.2rem;
               font-size: 1.1rem;
-              color: #000;
             }
 
             ion-icon {
               font-size: 1.1rem;
-              color: #000;
             }
           }
         }
@@ -64,12 +69,11 @@
 
     ion-footer {
       border-top: 1px solid #ccc;
-      background: #f9f9f9;
       display: flex;
-      justify-content: space-between;
-
+      justify-content: space-around;
+      border-width: 0;
       ion-button {
-        flex-basis: 50%;
+        flex-basis: 47%;
       }
     }
   }
